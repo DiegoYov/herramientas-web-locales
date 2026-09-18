@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Herramientas Web Locales | Vídeo & Suite PDF</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .drag-over {
+      border-color: #6366f1 !important;
+      background-color: rgba(99, 102, 241, 0.1) !important;
+    }
+    .tab-btn.active {
+      background-color: rgba(99, 102, 241, 0.2);
+      border-color: rgba(99, 102, 241, 0.5);
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col">
+
+  <!-- Header with Navigation Bar -->
+  <header class="bg-slate-800/80 backdrop-blur border-b border-slate-700/60 sticky top-0 z-20">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-500/30">
+          <i class="fa-solid fa-toolbox"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Herramientas Web Locales
+          </h1>
+          <p class="text-xs text-slate-400">Suite Vídeo (123apps) & PDF Completa</p>
+        </div>
+      </div>
+
+      <!-- Navigation Bar (Nav) -->
+      <nav class="flex flex-wrap items-center space-x-2 bg-slate-900/60 p-1.5 rounded-xl border border-slate-700/60">
+        <button onclick="switchTab('video')" id="nav-video" 
+                class="tab-btn active px-4 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition-all border border-transparent text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-film text-indigo-400"></i>
+          <span>Edición de Vídeos (123apps)</span>
+        </button>
+        <button onclick="switchTab('pdf-suite')" id="nav-pdf-suite" 
+                class="tab-btn px-4 py-2 rounded-lg text-xs font-semibold flex items-center space-x-2 transition-all border border-transparent text-slate-400 hover:text-slate-200">
+          <i class="fa-solid fa-file-pdf text-rose-400"></i>
+          <span>Suite Herramientas PDF</span>
+        </button>
+      </nav>
+
+      <!-- Status Badge -->
+      <div class="hidden lg:flex items-center space-x-2">
+        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span> Servidor Local Activo
+        </span>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-6 py-8 flex-1 w-full">
+    
+    <!-- ================================================================= -->
+    <!-- TAB 1: EDICIÓN DE VÍDEOS (SUITE 123APPS LOCAL)                     -->
+    <!-- ================================================================= -->
+    <div id="tab-content-video" class="space-y-8">
+      
+      <!-- Video Tools Cards (123apps Style) -->
+      <div class="bg-gradient-to-r from-indigo-900/40 via-purple-900/40 to-slate-900/40 border border-indigo-500/30 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="space-y-1">
+          <h2 class="text-xl font-bold text-slate-100 flex items-center space-x-2">
+            <i class="fa-solid fa-wand-magic-sparkles text-indigo-400"></i>
+            <span>Herramientas de Vídeo Rápidas (123apps Local)</span>
+          </h2>
+          <p class="text-xs text-slate-300">
+            Corta, ajusta volumen hasta 300%, cambia velocidad, extrae MP3, rota y convierte formatos 100% en tu equipo sin conexión.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+
+        <!-- Tool 1: Cortar Vídeo -->
+        <div onclick="openVideoToolModal('trim')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-indigo-500/50 rounded-2xl p-4 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-scissors"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-100 text-sm">Cortar Vídeo</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">Recorta un segmento especificando inicio y fin.</p>
+          </div>
+        </div>
+
+        <!-- Tool 2: Controlar Volumen -->
+        <div onclick="openVideoToolModal('volume')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-indigo-500/50 rounded-2xl p-4 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-volume-high"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-100 text-sm">Ajustar Volumen</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">Sube el audio a 300% (Boost) o silencia.</p>
+          </div>
+        </div>
+
+        <!-- Tool 3: Cambiar Velocidad -->
+        <div onclick="openVideoToolModal('speed')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-indigo-500/50 rounded-2xl p-4 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-gauge-high"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-100 text-sm">Velocidad</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">Acelera a 2.0x o cámara lenta a 0.5x.</p>
+          </div>
+        </div>
+
+        <!-- Tool 4: Extraer Audio MP3 -->
+        <div onclick="openVideoToolModal('extract-audio')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-indigo-500/50 rounded-2xl p-4 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-music"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-100 text-sm">Extraer MP3</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">Guarda únicamente el audio de cualquier vídeo.</p>
+          </div>
+        </div>
+
+        <!-- Tool 5: Rotar Vídeo -->
+        <div onclick="openVideoToolModal('rotate')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-indigo-500/50 rounded-2xl p-4 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-rotate"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-100 text-sm">Rotar Vídeo</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">Gira vídeos mal orientados 90°, 180° o 270°.</p>
+          </div>
+        </div>
+
+        <!-- Tool 6: Convertir Formato -->
+        <div onclick="openVideoToolModal('convert')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-indigo-500/50 rounded-2xl p-4 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-lg group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-repeat"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-100 text-sm">Convertidor</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">Convierte a WEBM, AVI, MOV o GIF animado.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Unificador de Vídeos Area -->
+      <div class="border-t border-slate-700/60 pt-6">
+        <h3 class="text-lg font-bold text-slate-100 mb-4 flex items-center space-x-2">
+          <i class="fa-solid fa-film text-indigo-400"></i>
+          <span>Unificador de Múltiples Vídeos</span>
+        </h3>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2">
+            <div id="dropzone" 
+                 class="border-2 border-dashed border-slate-700 hover:border-indigo-500/50 bg-slate-800/40 rounded-2xl p-8 text-center transition-all duration-200 cursor-pointer flex flex-col items-center justify-center min-h-[200px] group relative overflow-hidden">
+              <input type="file" id="fileInput" multiple accept="video/*" class="hidden">
+              <div class="w-14 h-14 rounded-full bg-indigo-600/10 text-indigo-400 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-all">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+              <h3 class="text-base font-semibold text-slate-200 mb-1">Arrastra y suelta tus vídeos aquí</h3>
+              <p class="text-xs text-slate-400 max-w-md">
+                Soporta <span class="text-indigo-400 font-medium">MP4, MOV, AVI, MKV, WEBM</span>. Puedes unificar 5, 10 o decenas de clips.
+              </p>
+              <button type="button" onclick="document.getElementById('fileInput').click()" 
+                      class="mt-3 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-lg transition-colors border border-slate-600 text-slate-200">
+                Examinar archivos locales
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center space-x-2 mb-3 text-indigo-400">
+                <i class="fa-solid fa-folder-open"></i>
+                <h3 class="font-semibold text-slate-200 text-sm">Añadir por Ruta Local</h3>
+              </div>
+              <textarea id="pathInput" rows="3" 
+                        placeholder="Ejemplo: C:\Users\TuUsuario\Videos\video1.mp4" 
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 resize-none font-mono"></textarea>
+            </div>
+            <button type="button" onclick="addByPath()" 
+                    class="w-full mt-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium rounded-xl text-xs transition-colors shadow-lg shadow-indigo-600/20 flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-plus text-xs"></i>
+              <span>Agregar Ruta</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Queue Section -->
+      <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 shadow-xl">
+        <div class="flex items-center justify-between mb-4 border-b border-slate-700/60 pb-4">
+          <div>
+            <h2 class="text-base font-bold text-slate-100 flex items-center space-x-2">
+              <span>Lista de Vídeos a Unificar</span>
+              <span id="videoCountBadge" class="bg-indigo-600/20 text-indigo-400 text-xs px-2.5 py-0.5 rounded-full font-semibold border border-indigo-500/20">0 vídeos</span>
+            </h2>
+          </div>
+          <button onclick="clearAll()" class="text-xs text-rose-400 hover:text-rose-300 font-medium px-3 py-1.5 rounded-lg hover:bg-rose-500/10">
+            <i class="fa-regular fa-trash-can mr-1"></i> Vaciar Lista
+          </button>
+        </div>
+
+        <div id="emptyQueueState" class="py-8 text-center text-slate-500">
+          <i class="fa-solid fa-film text-3xl mb-2 opacity-40"></i>
+          <p class="text-xs">No hay vídeos cargados en la cola.</p>
+        </div>
+
+        <div id="videoList" class="space-y-2"></div>
+      </div>
+
+      <!-- Export Settings Panel -->
+      <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-2">Resolución Objetivo</label>
+          <select id="resSelect" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+            <option value="1080p" selected>1080p Full HD (1920x1080)</option>
+            <option value="720p">720p HD (1280x720)</option>
+            <option value="original">Original</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-2">Nombre del Archivo Final</label>
+          <input type="text" id="outputNameInput" value="video_unificado.mp4" 
+                 class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-indigo-500">
+        </div>
+
+        <div>
+          <button id="mergeBtn" onclick="startMerging()" disabled 
+                  class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 disabled:opacity-50 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center space-x-2 text-sm">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Unificar Vídeos</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Result Card -->
+      <div id="resultCard" class="hidden bg-slate-800/80 border border-emerald-500/30 rounded-2xl p-6 shadow-2xl space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3 text-emerald-400">
+            <div class="w-10 h-10 rounded-full bg-emerald-500/10 flex items-center justify-center text-lg">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-100">¡Vídeo Procesado con Éxito!</h3>
+              <p class="text-xs text-slate-400">El resultado final está listo para descargar.</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <button onclick="openOutputFolder()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-xl text-slate-200 transition-colors flex items-center space-x-1.5">
+              <i class="fa-solid fa-folder-open text-indigo-400"></i>
+              <span>Abrir Carpeta</span>
+            </button>
+            <a id="downloadLink" href="#" download class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs rounded-xl transition-colors shadow-lg shadow-emerald-600/20 flex items-center space-x-2">
+              <i class="fa-solid fa-download"></i>
+              <span>Descargar Resultado</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-xl overflow-hidden bg-black max-h-[450px] flex justify-center">
+          <video id="previewPlayer" controls class="max-h-[450px] w-auto"></video>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- TAB 2: SUITE HERRAMIENTAS PDF (ILOVEPDF LOCAL + EPUB + OCR)       -->
+    <!-- ================================================================= -->
+    <div id="tab-content-pdf-suite" class="hidden space-y-8">
+      
+      <div class="bg-gradient-to-r from-rose-900/40 via-purple-900/40 to-indigo-900/40 border border-rose-500/30 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="space-y-1">
+          <h2 class="text-xl font-bold text-slate-100 flex items-center space-x-2">
+            <i class="fa-solid fa-boxes-stacked text-rose-400"></i>
+            <span>Suite de Herramientas PDF Completa</span>
+          </h2>
+          <p class="text-xs text-slate-300">
+            Todas las utilidades esenciales estilo ILovePDF (Unir, Dividir, Comprimir, EPUB, OCR, Imágenes, Cifrado) 100% locales en tu equipo.
+          </p>
+        </div>
+        <span class="bg-rose-500/10 text-rose-300 text-xs font-semibold px-3 py-1.5 rounded-full border border-rose-500/20 flex-shrink-0">
+          <i class="fa-solid fa-shield-halved mr-1"></i> 100% Privado & Offline
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div onclick="openPdfModal('merge')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-object-group"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Unir PDFs</h3>
+            <p class="text-xs text-slate-400">Combina varios archivos PDF en un único documento.</p>
+          </div>
+          <span class="text-xs font-semibold text-rose-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Seleccionar PDFs <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('split')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-scissors"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Dividir PDF</h3>
+            <p class="text-xs text-slate-400">Extrae páginas específicas o rangos de tu archivo PDF.</p>
+          </div>
+          <span class="text-xs font-semibold text-orange-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Dividir páginas <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('compress')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-file-compress"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Comprimir PDF</h3>
+            <p class="text-xs text-slate-400">Reduce el tamaño de tu archivo PDF conservando calidad.</p>
+          </div>
+          <span class="text-xs font-semibold text-emerald-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Optimizar MB <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('epub')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">PDF a EPUB</h3>
+            <p class="text-xs text-slate-400">Convierte libros PDF a formato EPUB para Kindle o iPad.</p>
+          </div>
+          <span class="text-xs font-semibold text-purple-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Convertir libro <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('ocr')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Reconocimiento OCR</h3>
+            <p class="text-xs text-slate-400">Reconoce y extrae texto de PDFs escaneados o imágenes.</p>
+          </div>
+          <span class="text-xs font-semibold text-blue-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Escanear texto <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('to-images')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-regular fa-images"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">PDF a Imágenes</h3>
+            <p class="text-xs text-slate-400">Convierte páginas del PDF a imágenes PNG/JPG en un ZIP.</p>
+          </div>
+          <span class="text-xs font-semibold text-indigo-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Exportar imágenes <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('from-images')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-file-image"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Imágenes a PDF</h3>
+            <p class="text-xs text-slate-400">Convierte fotos (JPG, PNG) en un documento PDF.</p>
+          </div>
+          <span class="text-xs font-semibold text-violet-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Crear PDF de fotos <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('rotate')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-rotate-right"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Rotar PDF</h3>
+            <p class="text-xs text-slate-400">Gira las páginas 90°, 180° o 270°.</p>
+          </div>
+          <span class="text-xs font-semibold text-cyan-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Girar orientación <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('watermark')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-stamp"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Marca de Agua</h3>
+            <p class="text-xs text-slate-400">Estampa un texto personalizado sobre las páginas.</p>
+          </div>
+          <span class="text-xs font-semibold text-pink-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Añadir texto <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('protect')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">Proteger PDF</h3>
+            <p class="text-xs text-slate-400">Cifra tu archivo PDF con una contraseña segura.</p>
+          </div>
+          <span class="text-xs font-semibold text-amber-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Poner contraseña <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+        <div onclick="openPdfModal('to-text')" class="bg-slate-800/40 hover:bg-slate-800/70 border border-slate-700/60 hover:border-rose-500/50 rounded-2xl p-6 cursor-pointer transition-all group shadow-lg flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <h3 class="font-bold text-slate-100 text-base">PDF a Texto (TXT)</h3>
+            <p class="text-xs text-slate-400">Extrae el contenido de texto plano a un archivo .txt.</p>
+          </div>
+          <span class="text-xs font-semibold text-teal-400 group-hover:translate-x-1 transition-transform inline-flex items-center">
+            Extraer texto <i class="fa-solid fa-arrow-right ml-1"></i>
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Result Card for PDF Suite -->
+      <div id="pdfSuiteResultCard" class="hidden bg-slate-800/80 border border-rose-500/30 rounded-2xl p-6 shadow-2xl space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3 text-rose-400">
+            <div class="w-10 h-10 rounded-full bg-rose-500/10 flex items-center justify-center text-lg">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+              <h3 id="pdfSuiteResultTitle" class="font-bold text-slate-100">¡Operación Completada!</h3>
+              <p id="pdfSuiteResultDesc" class="text-xs text-slate-400">El archivo final se procesó con éxito.</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-3">
+            <button onclick="openOutputFolder()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-xl text-slate-200 transition-colors flex items-center space-x-1.5">
+              <i class="fa-solid fa-folder-open text-rose-400"></i>
+              <span>Abrir Carpeta</span>
+            </button>
+            <a id="pdfSuiteDownloadLink" href="#" download class="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-medium text-xs rounded-xl transition-colors shadow-lg shadow-rose-600/20 flex items-center space-x-2">
+              <i class="fa-solid fa-download"></i>
+              <span>Descargar Archivo</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- MODAL INTERACTIVO GENERAL (VÍDEO / PDF)                           -->
+  <!-- ================================================================= -->
+  <div id="toolModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center px-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-lg w-full shadow-2xl space-y-6">
+      
+      <div class="flex items-center justify-between border-b border-slate-700/60 pb-3">
+        <h3 id="toolModalTitle" class="text-lg font-bold text-slate-100 flex items-center space-x-2">
+          <span>Herramienta</span>
+        </h3>
+        <button onclick="closeToolModal()" class="text-slate-400 hover:text-slate-200 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- File Select / Dropzone inside Modal -->
+      <div id="modalDropzone" 
+           class="border-2 border-dashed border-slate-700 hover:border-indigo-500/50 bg-slate-900/60 rounded-xl p-6 text-center cursor-pointer">
+        <input type="file" id="modalFileInput" class="hidden">
+        <i id="modalDropIcon" class="fa-solid fa-cloud-arrow-up text-2xl text-indigo-400 mb-2"></i>
+        <p id="modalFileText" class="text-xs text-slate-300 font-medium">Haz clic o arrastra el archivo aquí</p>
+      </div>
+
+      <div id="modalPathArea">
+        <label class="block text-xs font-semibold text-slate-300 mb-1">O ingresa ruta local del archivo</label>
+        <input type="text" id="modalPathInput" placeholder="Ej: C:\Archivos\video.mp4" 
+               class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200 font-mono focus:outline-none focus:border-indigo-500">
+      </div>
+
+      <!-- Dynamic Options Container -->
+      <div id="modalOptionsArea" class="space-y-4"></div>
+
+      <!-- Submit Action Button -->
+      <button id="modalActionBtn" onclick="executeToolAction()" 
+              class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-xl shadow-lg text-xs">
+        Ejecutar Herramienta
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Progress Overlay Modal -->
+  <div id="progressModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center px-4">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 max-w-lg w-full shadow-2xl space-y-6 text-center">
+      <div id="modalIcon" class="w-16 h-16 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-3xl mx-auto animate-bounce">
+        <i class="fa-solid fa-gear"></i>
+      </div>
+      <div>
+        <h3 id="modalTitle" class="text-xl font-bold text-slate-100">Procesando...</h3>
+        <p id="progressMessage" class="text-sm text-slate-400 mt-1">Iniciando tarea...</p>
+      </div>
+      
+      <div class="space-y-2">
+        <div class="w-full bg-slate-900 rounded-full h-3 overflow-hidden p-0.5 border border-slate-700">
+          <div id="progressBar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-rose-500 h-full rounded-full transition-all duration-300 w-0"></div>
+        </div>
+        <div class="flex justify-between text-xs text-slate-500 font-mono">
+          <span>0%</span>
+          <span id="progressPercent" class="text-indigo-400 font-bold">0%</span>
+          <span>100%</span>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-500">Por favor, mantén esta ventana abierta mientras se completa el proceso.</p>
+    </div>
+  </div>
+
+  <script>
+    // Tab Navigation Logic
+    function switchTab(tab) {
+      const videoTab = document.getElementById('tab-content-video');
+      const pdfSuiteTab = document.getElementById('tab-content-pdf-suite');
+      const navVideo = document.getElementById('nav-video');
+      const navPdfSuite = document.getElementById('nav-pdf-suite');
+
+      [videoTab, pdfSuiteTab].forEach(t => t.classList.add('hidden'));
+      [navVideo, navPdfSuite].forEach(n => n.classList.remove('active'));
+
+      if (tab === 'video') {
+        videoTab.classList.remove('hidden');
+        navVideo.classList.add('active');
+      } else {
+        pdfSuiteTab.classList.remove('hidden');
+        navPdfSuite.classList.add('active');
+      }
+    }
+
+    // ================= VIDEO MERGER LOGIC =================
+    let videosQueue = [];
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+
+    ['dragenter', 'dragover'].forEach(eName => {
+      dropzone.addEventListener(eName, (e) => { e.preventDefault(); dropzone.classList.add('drag-over'); }, false);
+    });
+    ['dragleave', 'drop'].forEach(eName => {
+      dropzone.addEventListener(eName, (e) => { e.preventDefault(); dropzone.classList.remove('drag-over'); }, false);
+    });
+    dropzone.addEventListener('drop', (e) => { if (e.dataTransfer.files.length) uploadFiles(e.dataTransfer.files); });
+    fileInput.addEventListener('change', (e) => { if (fileInput.files.length) uploadFiles(fileInput.files); });
+
+    async function uploadFiles(files) {
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i++) formData.append('files', files[i]);
+      showProgressModal(true, "Subiendo y analizando archivos...", "video");
+      try {
+        const res = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.status === 'ok') {
+          data.files.forEach(f => { if (f.type === 'video') videosQueue.push(f); });
+          renderQueue();
+        }
+      } catch (err) { alert("Error al subir archivos: " + err.message); }
+      finally { showProgressModal(false); }
+    }
+
+    async function addByPath() {
+      const pathText = document.getElementById('pathInput').value.trim();
+      if (!pathText) return;
+      const lines = pathText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      showProgressModal(true, "Analizando rutas...", "video");
+      try {
+        const res = await fetch('/api/add-by-path', {
+          method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ paths: lines })
+        });
+        const data = await res.json();
+        if (data.status === 'ok') {
+          data.files.forEach(f => {
+            if (!f.error && f.type === 'video') videosQueue.push(f);
+            else if (f.error) alert(`Error con '${f.filename}': ${f.error}`);
+          });
+          document.getElementById('pathInput').value = '';
+          renderQueue();
+        }
+      } catch (err) { alert("Error al añadir ruta: " + err.message); }
+      finally { showProgressModal(false); }
+    }
+
+    function renderQueue() {
+      const listEl = document.getElementById('videoList');
+      const emptyState = document.getElementById('emptyQueueState');
+      const badge = document.getElementById('videoCountBadge');
+      const mergeBtn = document.getElementById('mergeBtn');
+
+      badge.textContent = `${videosQueue.length} vídeos`;
+      mergeBtn.disabled = videosQueue.length === 0;
+
+      if (videosQueue.length === 0) {
+        emptyState.classList.remove('hidden');
+        listEl.innerHTML = '';
+        return;
+      }
+      emptyState.classList.add('hidden');
+      listEl.innerHTML = '';
+
+      videosQueue.forEach((v, index) => {
+        const item = document.createElement('div');
+        item.className = 'video-item bg-slate-900 border border-slate-700/70 rounded-xl p-3 flex items-center justify-between gap-4 transition-all hover:border-indigo-500/40';
+
+        const formatDuration = (sec) => {
+          if (!sec) return '0s';
+          const m = Math.floor(sec / 60); const s = Math.floor(sec % 60);
+          return m > 0 ? `${m}m ${s}s` : `${s}s`;
+        };
+
+        item.innerHTML = `
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-400 font-bold text-xs flex items-center justify-center flex-shrink-0 font-mono">${index + 1}</span>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-slate-200 truncate" title="${v.filename}">${v.filename}</p>
+              <div class="flex items-center space-x-3 text-xs text-slate-400 mt-0.5 font-mono">
+                <span><i class="fa-regular fa-clock mr-1"></i>${formatDuration(v.duration)}</span>
+                ${v.width ? `<span><i class="fa-solid fa-expand mr-1"></i>${v.width}x${v.height}</span>` : ''}
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center space-x-1.5 flex-shrink-0">
+            <button onclick="moveItem(${index}, -1)" ${index === 0 ? 'disabled' : ''} class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-30 text-slate-300 text-xs"><i class="fa-solid fa-arrow-up"></i></button>
+            <button onclick="moveItem(${index}, 1)" ${index === videosQueue.length - 1 ? 'disabled' : ''} class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 disabled:opacity-30 text-slate-300 text-xs"><i class="fa-solid fa-arrow-down"></i></button>
+            <button onclick="removeItem(${index})" class="w-8 h-8 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs ml-1"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        `;
+        listEl.appendChild(item);
+      });
+    }
+
+    function moveItem(index, dir) {
+      const newIndex = index + dir;
+      if (newIndex < 0 || newIndex >= videosQueue.length) return;
+      const temp = videosQueue[index];
+      videosQueue[index] = videosQueue[newIndex];
+      videosQueue[newIndex] = temp;
+      renderQueue();
+    }
+    function removeItem(i) { videosQueue.splice(i, 1); renderQueue(); }
+    function clearAll() { videosQueue = []; renderQueue(); }
+
+    async function startMerging() {
+      if (videosQueue.length === 0) return;
+      const resChoice = document.getElementById('resSelect').value;
+      const outName = document.getElementById('outputNameInput').value.trim() || 'video_unificado.mp4';
+      showProgressModal(true, "Iniciando unificación de vídeos...", "video");
+      try {
+        const payload = { files: videosQueue.map(v => v.id), target_resolution: resChoice, output_filename: outName };
+        const res = await fetch('/api/merge', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload) });
+        const data = await res.json();
+        if (data.status === 'ok') pollProgress(data.task_id, 'video');
+        else { alert("Error: " + data.detail); showProgressModal(false); }
+      } catch (err) { alert("Error: " + err.message); showProgressModal(false); }
+    }
+
+    // ================= DYNAMIC MODAL LOGIC (VIDEO & PDF TOOLS) =================
+    let currentCategory = 'video'; // 'video' or 'pdf'
+    let currentTool = null;
+    let modalSelectedFiles = [];
+
+    function openVideoToolModal(toolKey) {
+      currentCategory = 'video';
+      openToolModal(toolKey, {
+        'trim': 'Cortar / Dividir Vídeo',
+        'volume': 'Ajustar Volumen de Vídeo',
+        'speed': 'Cambiar Velocidad de Vídeo',
+        'extract-audio': 'Extraer Audio a MP3',
+        'rotate': 'Rotar Vídeo',
+        'convert': 'Convertir Formato de Vídeo'
+      });
+    }
+
+    function openPdfModal(toolKey) {
+      currentCategory = 'pdf';
+      openToolModal(toolKey, {
+        'merge': 'Unir PDFs', 'split': 'Dividir PDF', 'compress': 'Comprimir PDF',
+        'epub': 'Convertir PDF a EPUB', 'ocr': 'Reconocimiento de Texto OCR',
+        'to-images': 'PDF a Imágenes', 'from-images': 'Imágenes a PDF', 'rotate': 'Rotar PDF',
+        'watermark': 'Marca de Agua en PDF', 'protect': 'Proteger PDF con Contraseña', 'to-text': 'PDF a Texto (TXT)'
+      });
+    }
+
+    function openToolModal(toolKey, titlesMap) {
+      currentTool = toolKey;
+      modalSelectedFiles = [];
+      const modal = document.getElementById('toolModal');
+      const title = document.getElementById('toolModalTitle');
+      const optArea = document.getElementById('modalOptionsArea');
+      const fileInput = document.getElementById('modalFileInput');
+
+      optArea.innerHTML = '';
+      document.getElementById('modalPathInput').value = '';
+      document.getElementById('modalFileText').textContent = 'Haz clic o arrastra el archivo aquí';
+
+      const themeIcon = currentCategory === 'video' ? 'fa-video text-indigo-400' : 'fa-file-pdf text-rose-400';
+      title.innerHTML = `<i class="fa-solid ${themeIcon}"></i><span>${titlesMap[toolKey]}</span>`;
+
+      if (currentCategory === 'video') {
+        fileInput.multiple = false;
+        fileInput.accept = 'video/*';
+      } else {
+        fileInput.multiple = toolKey === 'merge' || toolKey === 'from-images';
+        fileInput.accept = toolKey === 'from-images' ? 'image/*' : '.pdf';
+      }
+
+      // Populate Video Options
+      if (currentCategory === 'video') {
+        if (toolKey === 'trim') {
+          optArea.innerHTML = `
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Tiempo Inicio (seg o HH:MM:SS)</label>
+                <input type="text" id="optTrimStart" value="00:00:00" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200 font-mono">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Tiempo Fin (seg o HH:MM:SS)</label>
+                <input type="text" id="optTrimEnd" value="00:00:10" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200 font-mono">
+              </div>
+            </div>`;
+        } else if (toolKey === 'volume') {
+          optArea.innerHTML = `
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Nivel de Volumen (<span id="volLabel">200%</span>)</label>
+              <input type="range" id="optVolume" min="0" max="3" step="0.1" value="2.0" 
+                     oninput="document.getElementById('volLabel').textContent = Math.round(this.value * 100) + '%'"
+                     class="w-full accent-emerald-500">
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1">
+                <span>0% (Silenciar)</span><span>100% (Normal)</span><span>300% (Potenciar)</span>
+              </div>
+            </div>`;
+        } else if (toolKey === 'speed') {
+          optArea.innerHTML = `
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Velocidad de Reproducción</label>
+              <select id="optSpeed" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200">
+                <option value="0.5">0.5x (Cámara Lenta)</option>
+                <option value="0.75">0.75x (Lento)</option>
+                <option value="1.0" selected>1.0x (Normal)</option>
+                <option value="1.25">1.25x (Rápido)</option>
+                <option value="1.5">1.5x (Más Rápido)</option>
+                <option value="2.0">2.0x (Cámara Rápida)</option>
+              </select>
+            </div>`;
+        } else if (toolKey === 'extract-audio') {
+          optArea.innerHTML = `
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Formato de Audio de Salida</label>
+              <select id="optAudioFormat" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200">
+                <option value="mp3" selected>MP3 (Audio Estándar)</option>
+                <option value="wav">WAV (Audio Alta Fidelidad)</option>
+              </select>
+            </div>`;
+        } else if (toolKey === 'rotate') {
+          optArea.innerHTML = `
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Ángulo de Rotación</label>
+              <select id="optVideoRotate" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200">
+                <option value="90">90° (Derecha)</option>
+                <option value="180">180° (Invertido)</option>
+                <option value="270">270° (Izquierda)</option>
+              </select>
+            </div>`;
+        } else if (toolKey === 'convert') {
+          optArea.innerHTML = `
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Formato de Destino</label>
+              <select id="optConvertFormat" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200">
+                <option value="webm">WEBM (Web Vídeo)</option>
+                <option value="avi">AVI (Video Estándar)</option>
+                <option value="mov">MOV (Apple QuickTime)</option>
+                <option value="gif">GIF Animado</option>
+                <option value="mp4" selected>MP4 (Universal)</option>
+              </select>
+            </div>`;
+        }
+      }
+
+      // Populate PDF Options
+      if (currentCategory === 'pdf') {
+        if (toolKey === 'epub') {
+          optArea.innerHTML = `
+            <div><label class="block text-xs font-semibold text-slate-300 mb-1">Título del Libro (Opcional)</label><input type="text" id="optTitle" placeholder="Detectar del PDF automáticamente" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200"></div>
+            <div><label class="block text-xs font-semibold text-slate-300 mb-1">Autor (Opcional)</label><input type="text" id="optAuthor" placeholder="Nombre del Autor" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200"></div>`;
+        } else if (toolKey === 'ocr') {
+          optArea.innerHTML = `
+            <div><label class="block text-xs font-semibold text-slate-300 mb-1">Idioma del documento</label><select id="optOcrLang" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200"><option value="spa+eng" selected>Español / Inglés</option><option value="spa">Español</option><option value="eng">Inglés</option></select></div>`;
+        } else if (toolKey === 'split') {
+          optArea.innerHTML = `<div><label class="block text-xs font-semibold text-slate-300 mb-1">Rango de páginas a extraer</label><input type="text" id="optPages" placeholder="Ej: 1, 3, 5-10" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200"></div>`;
+        } else if (toolKey === 'rotate') {
+          optArea.innerHTML = `<div><label class="block text-xs font-semibold text-slate-300 mb-1">Ángulo de rotación</label><select id="optRotate" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200"><option value="90">90° (Derecha)</option><option value="180">180° (Invertido)</option><option value="270">270° (Izquierda)</option></select></div>`;
+        } else if (toolKey === 'watermark') {
+          optArea.innerHTML = `<div><label class="block text-xs font-semibold text-slate-300 mb-1">Texto de marca de agua</label><input type="text" id="optWatermark" value="CONFIDENCIAL" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200"></div>`;
+        } else if (toolKey === 'protect') {
+          optArea.innerHTML = `<div><label class="block text-xs font-semibold text-slate-300 mb-1">Contraseña de apertura</label><input type="password" id="optPassword" placeholder="Ingresa contraseña" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-slate-200"></div>`;
+        }
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeToolModal() {
+      document.getElementById('toolModal').classList.add('hidden');
+    }
+
+    const modalDropzone = document.getElementById('modalDropzone');
+    const modalFileInput = document.getElementById('modalFileInput');
+
+    modalDropzone.addEventListener('click', () => modalFileInput.click());
+    modalFileInput.addEventListener('change', async (e) => {
+      if (!e.target.files.length) return;
+      const formData = new FormData();
+      for (let i = 0; i < e.target.files.length; i++) formData.append('files', e.target.files[i]);
+      showProgressModal(true, "Cargando archivos seleccionados...", currentCategory);
+      try {
+        const res = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.status === 'ok') {
+          modalSelectedFiles = data.files.map(f => f.id);
+          document.getElementById('modalFileText').textContent = `${data.files.length} archivo(s) listo(s)`;
+        }
+      } catch (err) { alert("Error: " + err.message); }
+      finally { showProgressModal(false); }
+    });
+
+    async function executeToolAction() {
+      const pathInputVal = document.getElementById('modalPathInput').value.trim();
+      if (pathInputVal) {
+        showProgressModal(true, "Verificando ruta local...", currentCategory);
+        try {
+          const res = await fetch('/api/add-by-path', {
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ paths: [pathInputVal] })
+          });
+          const data = await res.json();
+          if (data.status === 'ok' && data.files.length > 0) {
+            modalSelectedFiles = data.files.map(f => f.id);
+          }
+        } catch (err) { alert("Error al verificar ruta: " + err.message); return; }
+        finally { showProgressModal(false); }
+      }
+
+      if (modalSelectedFiles.length === 0) {
+        alert("Por favor selecciona un archivo o ingresa una ruta local válida.");
+        return;
+      }
+
+      closeToolModal();
+      showProgressModal(true, "Procesando vídeo/documento...", currentCategory);
+
+      try {
+        let endpoint = "";
+        let payload = {};
+
+        if (currentCategory === 'video') {
+          endpoint = `/api/video/${currentTool}`;
+          if (currentTool === 'trim') {
+            const s = document.getElementById('optTrimStart')?.value || '0';
+            const e = document.getElementById('optTrimEnd')?.value || '10';
+            payload = { file_id_or_path: modalSelectedFiles[0], start_time: s, end_time: e };
+          } else if (currentTool === 'volume') {
+            const v = parseFloat(document.getElementById('optVolume')?.value || '1.0');
+            payload = { file_id_or_path: modalSelectedFiles[0], volume_factor: v };
+          } else if (currentTool === 'speed') {
+            const s = parseFloat(document.getElementById('optSpeed')?.value || '1.0');
+            payload = { file_id_or_path: modalSelectedFiles[0], speed_factor: s };
+          } else if (currentTool === 'extract-audio') {
+            const fmt = document.getElementById('optAudioFormat')?.value || 'mp3';
+            payload = { file_id_or_path: modalSelectedFiles[0], audio_format: fmt };
+          } else if (currentTool === 'rotate') {
+            const deg = parseInt(document.getElementById('optVideoRotate')?.value || '90');
+            payload = { file_id_or_path: modalSelectedFiles[0], degrees: deg };
+          } else if (currentTool === 'convert') {
+            const fmt = document.getElementById('optConvertFormat')?.value || 'mp4';
+            payload = { file_id_or_path: modalSelectedFiles[0], target_format: fmt };
+          }
+        } else {
+          endpoint = currentTool === 'epub' ? '/api/convert-pdf' : `/api/pdf/${currentTool}`;
+          if (currentTool === 'epub') {
+            const tVal = document.getElementById('optTitle')?.value || '';
+            const aVal = document.getElementById('optAuthor')?.value || '';
+            payload = { file_id_or_path: modalSelectedFiles[0], title: tVal, author: aVal, include_images: true };
+          } else if (currentTool === 'ocr') {
+            const lang = document.getElementById('optOcrLang')?.value || 'spa+eng';
+            payload = { file_id_or_path: modalSelectedFiles[0], language: lang };
+          } else if (currentTool === 'merge') {
+            payload = { files: modalSelectedFiles };
+          } else if (currentTool === 'from-images') {
+            payload = { files: modalSelectedFiles };
+          } else if (currentTool === 'split') {
+            const pagesVal = document.getElementById('optPages')?.value || '1';
+            payload = { file_id_or_path: modalSelectedFiles[0], pages: pagesVal };
+          } else if (currentTool === 'rotate') {
+            const deg = parseInt(document.getElementById('optRotate')?.value || '90');
+            payload = { file_id_or_path: modalSelectedFiles[0], degrees: deg };
+          } else if (currentTool === 'watermark') {
+            const text = document.getElementById('optWatermark')?.value || 'CONFIDENCIAL';
+            payload = { file_id_or_path: modalSelectedFiles[0], text: text };
+          } else if (currentTool === 'protect') {
+            const pwd = document.getElementById('optPassword')?.value || '1234';
+            payload = { file_id_or_path: modalSelectedFiles[0], password: pwd };
+          } else {
+            payload = { file_id_or_path: modalSelectedFiles[0] };
+          }
+        }
+
+        const res = await fetch(endpoint, {
+          method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status === 'ok') {
+          pollProgress(data.task_id, currentCategory);
+        } else {
+          alert("Error: " + data.detail);
+          showProgressModal(false);
+        }
+      } catch (err) {
+        alert("Error al ejecutar acción: " + err.message);
+        showProgressModal(false);
+      }
+    }
+
+    // SHARED PROGRESS & RESULTS LOGIC
+    function pollProgress(taskId, mode) {
+      const interval = setInterval(async () => {
+        try {
+          const res = await fetch(`/api/status/${taskId}`);
+          const status = await res.json();
+
+          updateProgress(status.progress, status.message);
+
+          if (status.status === 'completed') {
+            clearInterval(interval);
+            showProgressModal(false);
+            if (mode === 'video') {
+              showVideoResult(status.download_url);
+            } else {
+              showSuiteResult(status.download_url, status.result_details);
+            }
+          } else if (status.status === 'error') {
+            clearInterval(interval);
+            showProgressModal(false);
+            alert("Error durante el procesamiento:\n" + status.message);
+          }
+        } catch (err) {
+          console.error("Error consultando estado:", err);
+        }
+      }, 800);
+    }
+
+    function showProgressModal(show, text = "", type = "video") {
+      const modal = document.getElementById('progressModal');
+      const icon = document.getElementById('modalIcon');
+      const title = document.getElementById('modalTitle');
+
+      if (show) {
+        modal.classList.remove('hidden');
+        if (type === 'pdf') {
+          icon.className = "w-16 h-16 rounded-2xl bg-rose-600/20 text-rose-400 flex items-center justify-center text-3xl mx-auto animate-bounce";
+          icon.innerHTML = '<i class="fa-solid fa-file-pdf"></i>';
+          title.textContent = "Procesando Herramienta PDF...";
+        } else {
+          icon.className = "w-16 h-16 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-3xl mx-auto animate-bounce";
+          icon.innerHTML = '<i class="fa-solid fa-film"></i>';
+          title.textContent = "Procesando Edición de Vídeo...";
+        }
+        if (text) updateProgress(0, text);
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function updateProgress(percent, message) {
+      document.getElementById('progressBar').style.width = `${percent}%`;
+      document.getElementById('progressPercent').textContent = `${Math.round(percent)}%`;
+      if (message) document.getElementById('progressMessage').textContent = message;
+    }
+
+    function showVideoResult(downloadUrl) {
+      const card = document.getElementById('resultCard');
+      const link = document.getElementById('downloadLink');
+      const player = document.getElementById('previewPlayer');
+
+      link.href = downloadUrl;
+      player.src = downloadUrl;
+      card.classList.remove('hidden');
+      card.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showSuiteResult(downloadUrl, details) {
+      const card = document.getElementById('pdfSuiteResultCard');
+      const link = document.getElementById('pdfSuiteDownloadLink');
+      const desc = document.getElementById('pdfSuiteResultDesc');
+
+      link.href = downloadUrl;
+      if (details && details.percent_saved !== undefined) {
+        desc.textContent = `Archivo optimizado. Reducción de tamaño: ${details.percent_saved}%`;
+      } else {
+        desc.textContent = "Archivo resultante listo para descargar.";
+      }
+      card.classList.remove('hidden');
+      card.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function openOutputFolder() {
+      try { await fetch('/api/open-folder', { method: 'POST' }); } catch (e) { console.error(e); }
+    }
+  </script>
+</body>
+</html>

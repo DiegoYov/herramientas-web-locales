@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Temporary and Output directories
+uploads/
+outputs/
+*.mp4
+*.webm
+*.avi
+*.mov
+*.mkv
+*.pdf
+*.epub
+*.zip
+*.txt
+!requirements.txt
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
