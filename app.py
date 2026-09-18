@@ -675,5 +675,5 @@ async def open_output_folder():
 
 if __name__ == "__main__":
     import uvicorn
-    print(f"Iniciando Servidor de Herramientas Web Locales en http://127.0.0.1:8000 ...")
-    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=False)
+    print(f"Iniciando Servidor de Herramientas Web Locales en http://0.0.0.0:8000 ...")
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=False)
