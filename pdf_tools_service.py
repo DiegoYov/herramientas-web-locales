@@ -333,8 +333,8 @@ async def pdf_to_text(
 
 async def pdf_ocr(
     pdf_path: str,
+    language: str,
     output_path: str,
-    language: str = "spa+eng",
     progress_callback: Optional[Callable[[float, str], None]] = None
 ) -> str:
     """
