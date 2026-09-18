@@ -301,7 +301,7 @@ async def protect_pdf(
 
 async def pdf_to_text(
     pdf_path: str,
-    output_txt_path: str,
+    output_path: str,
     progress_callback: Optional[Callable[[float, str], None]] = None
 ) -> str:
     """Extracts all text content from a PDF document into a TXT file."""
@@ -322,18 +322,18 @@ async def pdf_to_text(
         
     doc.close()
     
-    with open(output_txt_path, "w", encoding="utf-8") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write("".join(text_content))
         
     if progress_callback:
         progress_callback(100.0, "¡Texto extraído con éxito!")
         
-    return output_txt_path
+    return output_path
 
 
 async def pdf_ocr(
     pdf_path: str,
-    output_txt_path: str,
+    output_path: str,
     language: str = "spa+eng",
     progress_callback: Optional[Callable[[float, str], None]] = None
 ) -> str:
@@ -366,10 +366,10 @@ async def pdf_ocr(
 
     doc.close()
 
-    with open(output_txt_path, "w", encoding="utf-8") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write("".join(text_content))
 
     if progress_callback:
         progress_callback(100.0, "¡Reconocimiento OCR completado!")
 
-    return output_txt_path
+    return output_path
