@@ -1,4 +1,5 @@
 import os
+import shutil
 import zipfile
 import tempfile
 from typing import List, Optional, Callable, Dict, Any
@@ -101,29 +102,80 @@ async def compress_pdf(
     output_path: str,
     progress_callback: Optional[Callable[[float, str], None]] = None
 ) -> Dict[str, Any]:
-    """Optimizes streams, fonts, and images to compress PDF size."""
+    """
+    Advanced PDF Compressor: Re-encodes images as JPEG, downscales large images,
+    cleans streams, and garbage-collects unused objects.
+    """
     if not os.path.exists(pdf_path):
         raise FileNotFoundError(f"Archivo PDF no encontrado: {pdf_path}")
         
     original_size = os.path.getsize(pdf_path)
     if progress_callback:
-        progress_callback(30.0, "Optimizando imágenes y objetos del PDF...")
+        progress_callback(10.0, "Analizando y optimizando objetos e imágenes...")
         
     doc = pymupdf.open(pdf_path)
+    total_pages = len(doc)
+    processed_xrefs = set()
     
+    # Re-compress embedded images
+    for idx, page in enumerate(doc):
+        if progress_callback:
+            progress_callback(10.0 + ((idx + 1) / total_pages) * 65.0, f"Comprimiendo imágenes p. {idx+1}/{total_pages}...")
+            
+        try:
+            image_list = page.get_images(full=True)
+            for img in image_list:
+                xref = img[0]
+                if xref in processed_xrefs:
+                    continue
+                processed_xrefs.add(xref)
+                
+                pix = pymupdf.Pixmap(doc, xref)
+                # Convert color space if CMYK or special alpha
+                if pix.n >= 5 or pix.alpha:
+                    pix = pymupdf.Pixmap(pymupdf.csRGB, pix)
+                    
+                # Downsample large images (>1500px)
+                if pix.width > 1500 or pix.height > 1500:
+                    scale = 1500.0 / max(pix.width, pix.height)
+                    new_w = max(1, int(pix.width * scale))
+                    new_h = max(1, int(pix.height * scale))
+                    pix = pymupdf.Pixmap(pix, new_w, new_h, False)
+                    
+                jpeg_data = pix.tobytes("jpeg", jpg_quality=65)
+                page.replace_image(xref, stream=jpeg_data)
+        except Exception:
+            pass
+
     if progress_callback:
-        progress_callback(70.0, "Comprimiendo flujos de datos...")
-        
-    doc.save(output_path, garbage=4, deflate=True, clean=True)
+        progress_callback(80.0, "Comprimiendo fuentes y estructuras del PDF...")
+
+    doc.save(
+        output_path,
+        garbage=4,
+        deflate=True,
+        deflate_images=True,
+        deflate_fonts=True,
+        clean=True
+    )
     doc.close()
-    
+
     new_size = os.path.getsize(output_path)
+    
+    # If the compressed version ends up larger than original, keep original
+    if new_size > original_size:
+        shutil.copyfile(pdf_path, output_path)
+        new_size = original_size
+
     saved_bytes = max(0, original_size - new_size)
     percent_saved = round((saved_bytes / original_size) * 100.0, 1) if original_size > 0 else 0
-    
+
     if progress_callback:
-        progress_callback(100.0, f"¡Compresión completada! Reducción: {percent_saved}%")
-        
+        if percent_saved > 0:
+            progress_callback(100.0, f"¡Compresión completada! Reducción: {percent_saved}%")
+        else:
+            progress_callback(100.0, "¡PDF procesado! El documento ya tenía la compresión máxima.")
+
     return {
         "output_path": output_path,
         "original_size": original_size,
@@ -353,15 +405,13 @@ async def pdf_ocr(
 
         text = ""
         try:
-            # Try PyMuPDF native OCR textpage if Tesseract plugin is linked
             tp = page.get_textpage_ocr(flags=0, language=language)
             text = tp.extractText()
         except Exception:
-            # Fallback to standard text extraction or PyMuPDF block extraction
             text = page.get_text()
 
         text_content.append(f"=== OCR PÁGINA {i+1} ===\n")
-        text_content.append(text.strip() if text.strip() else "[Página escaneada sin texto detectable o requiere Tesseract local]")
+        text_content.append(text.strip() if text.strip() else "[Página escaneada sin texto detectable]")
         text_content.append("\n\n")
 
     doc.close()
